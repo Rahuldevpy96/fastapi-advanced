@@ -1,3 +1,4 @@
 # fastapi-advanced
 
-Nre
+Creating an project on fastapi
+Using Mongodb
