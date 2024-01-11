@@ -36,7 +36,7 @@
     </nav>
 <div class="container">
   <h1>Start Adding Your Notes</h1>
-  <form method="POST">
+  <form action="/" method="POST">
     <div class="form-group">
       <label for="title">Note Title</label>
       <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
@@ -53,7 +53,7 @@
 <div class="container">
   <h2>Your Notes</h2>
   {% for note in newDocs %}
-  <div>{{note.Notes}}</div>
+  <div>{{note.title}}</div>
   {% endfor %}
 </div>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
