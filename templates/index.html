@@ -36,16 +36,14 @@
     </nav>
 <div class="container">
   <h1>Start Adding Your Notes</h1>
-  <form action="/" method="POST">
+  <form action="/" method="post">
     <div class="form-group">
       <label for="title">Note Title</label>
-      <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
-      <small id="title" class="form-text text-muted">Enter Your Note Title Here</small>
+      <input type="text" class="form-control" name="title" aria-describedby="emailHelp">
     </div>
     <div class="form-group">
       <label for="description">Note Description</label>
-      <input type="text" class="form-control" id="description" aria-describedby="emailHelp">
-      <small id="description" class="form-text text-muted">Enter Your Note Description Here</small>
+      <input type="text" class="form-control" name="description" aria-describedby="emailHelp">
     </div>
       <button type="submit" class="btn btn-primary">Save</button>
   </form>

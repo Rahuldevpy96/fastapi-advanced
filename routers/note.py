@@ -23,7 +23,9 @@ async def read_item(request: Request):
     return templates.TemplateResponse("index.html", {"request":request,"newDocs":newDocs} )
 
 
-@note.post('/',response_class=HTMLResponse)
-async def add_item(note:Note):
-    docs=conn.Notes.Notes.insert_one(dict(note))
-    return noteEntity(docs)
+@note.post("/")
+async def add_item(request:Request):
+    form= await request.form()
+    formDict=dict(form)
+    docs=conn.Notes.Notes.insert_one(formDict)
+    return {"Success":True}
