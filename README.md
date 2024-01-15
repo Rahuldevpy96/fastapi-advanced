@@ -10,3 +10,6 @@ Till now i have created a navbar in index.html and a form and getting data from 
 Adding data from frontend is not complete yet will complete it soon.
 
 Now we are able to insert data from frontend too.
+
+Today i have created apis for creating new user and get all user
+we are able to add the user but we are not getting response as expected so will work on this.
