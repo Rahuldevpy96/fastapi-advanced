@@ -10,11 +10,10 @@ templates = Jinja2Templates(directory="templates")
 
 @user.get('/users')
 async def find_all_users():
-    print(usersEntity(conn.Notes.Notes.find()))
-    return usersEntity(conn.Notes.Notes.find())
+    return usersEntity(conn.Notes.user.find())
 
 
 @user.post('/users')
 async def create_users(user:User):
-    conn.Notes.Notes.insert_one(dict(user))
-    return usersEntity(conn.Notes.Notes.find())
+    users=conn.Notes.user.insert_one(dict(user))
+    return usersEntity(conn.Notes.user.find())
