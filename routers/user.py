@@ -1,3 +1,4 @@
+from bson import ObjectId
 from fastapi import APIRouter
 from fastapi.templating import Jinja2Templates
 from config.db import conn
@@ -17,3 +18,10 @@ async def find_all_users():
 async def create_users(user:User):
     users=conn.Notes.user.insert_one(dict(user))
     return usersEntity(conn.Notes.user.find())
+
+@user.put('/user/{id}')
+async def update_user(id,user:User):
+    conn.Notes.user.find_one_and_update({"_id":(ObjectId(id))},{
+        "$set":dict(user)
+    })
+    return userEntity(conn.Notes.user.find_one({"_id":(ObjectId(id))}))
