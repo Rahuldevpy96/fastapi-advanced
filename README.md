@@ -13,3 +13,5 @@ Now we are able to insert data from frontend too.
 
 Today i have created apis for creating new user and get all user
 we are able to add the user but we are not getting response as expected so will work on this.
+
+Now we are able to add, update, delete and get all users.

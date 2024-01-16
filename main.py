@@ -5,8 +5,8 @@ from routers.user import user
 
 
 app=FastAPI()
-app.include_router(note)
-app.include_router(user)
+app.include_router(note,tags=['Notes'])
+app.include_router(user,tags=['Users'])
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
