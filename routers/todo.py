@@ -9,3 +9,10 @@ todo=APIRouter()
 def get_todo():
     todo=todos_serializer(conn.Notes.todo.find())
     return {"status":"ok","data":todo}
+
+
+@todo.post('/post')
+def get_todo(todo:Todo):
+    todos=conn.Notes.todo.insert_one(dict(todo))
+    todo=todos_serializer(conn.Notes.todo.find({"_id":todos.inserted_id}))
+    return ({"Stutus":"Success","data":todo})

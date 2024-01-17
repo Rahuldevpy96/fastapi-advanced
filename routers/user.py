@@ -17,7 +17,7 @@ async def find_all_users():
 @user.post('/users')
 async def create_users(user:User):
     users=conn.Notes.user.insert_one(dict(user))
-    return usersEntity(conn.Notes.user.find())
+    return usersEntity(conn.Notes.user.find({"_id":users.inserted_id}))
 
 @user.put('/user/{id}')
 async def update_user(id,user:User):
