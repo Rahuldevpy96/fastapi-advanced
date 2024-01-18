@@ -26,3 +26,8 @@ def update_todo(id,todo:Todo):
     })
     todo=todos_serializer(conn.Notes.todo.find({"_id":ObjectId(id)}))
     return ({"Stutus":"Success","data":todo})
+
+@todo.delete('/delete/{id}')
+def update_todo(id,todo:Todo):
+    conn.Notes.todo.find_one_and_delete({"_id":(ObjectId(id))})
+    return ({"Stutus":"Success"})
