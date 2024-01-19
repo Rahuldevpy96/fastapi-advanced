@@ -27,5 +27,5 @@ async def update_user(id,user:User):
     return userEntity(conn.Notes.user.find_one({"_id":(ObjectId(id))}))
 
 @user.delete('/user/{id}')
-async def update_user(id,user:User):
+async def delete_user(id,user:User):
     return userEntity(conn.Notes.user.find_one_and_delete({"_id":(ObjectId(id))}))
