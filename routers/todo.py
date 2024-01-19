@@ -1,5 +1,5 @@
 from bson import ObjectId
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException,status
 from config.db import conn
 from models.todo import Todo
 from schemas.todo import todo_serializer,todos_serializer
@@ -8,32 +8,61 @@ todo=APIRouter()
 
 @todo.get('/todo')
 def get_todo():
-    '''Docstring'''
+    '''This Function will get all the todo list
+    If there is no data in  database than it will return a message "Data Not found"'''
     todo=todos_serializer(conn.Notes.todo.find())
-    return {"status":"ok","data":todo}
+    if todo:
+        return {"status":"ok","data":todo}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Data Not found"
+        )
 
 @todo.get('/todo/{id}')
 def get_todo(id):
-    '''Docstring'''
+    '''This function will return the particular data of given id'''
     todo=todos_serializer(conn.Notes.todo.find({"_id":(ObjectId(id))}))
-    return {"status":"ok","data":todo}
-    
+    if todo:
+        return {"status":"ok","data":todo}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Data Not found"
+        )
+
 @todo.post('/todo')
 def post_todo(todo:Todo):
+    '''From this api we will be able to add new data'''
     todos=conn.Notes.todo.insert_one(dict(todo))
     todo=todos_serializer(conn.Notes.todo.find({"_id":todos.inserted_id}))
-    return ({"Stutus":"Success","data":todo})
+    if todo:
+        return ({"status":"Success","data":todo})
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Data not saved"
+        )
 
 
 @todo.put('/todo/{id}/')
 def update_todo(id,todo:Todo):
-    todos=conn.Notes.todo.find_one_and_update({"_id":(ObjectId(id))},{
+    '''From this api we can update the data of given id'''
+    updated=conn.Notes.todo.find_one_and_update({"_id":(ObjectId(id))},{
         "$set":dict(todo)
     })
-    todo=todos_serializer(conn.Notes.todo.find({"_id":ObjectId(id)}))
-    return ({"Stutus":"Success","data":todo})
+    if updated:
+        return ({"status":"Success","data":todo})
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Data not updated"
+        )
+
 
 @todo.delete('/todo/{id}/')
 def delete_todo(id):
-    conn.Notes.todo.find_one_and_delete({"_id":(ObjectId(id))})
-    return ({"Stutus":"Success"})
+    '''This api will return the data of given id'''
+    deleted=conn.Notes.todo.find_one_and_delete({"_id":(ObjectId(id))})
+    if deleted:
+        return ({"status":"Success"})
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Data not deleted"
+        )
