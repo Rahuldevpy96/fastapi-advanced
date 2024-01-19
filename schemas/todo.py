@@ -1,10 +1,8 @@
 def todo_serializer(todo)->dict:
     return{
         "id":str(todo["_id"]),
-        "name":todo["name"],
-        "description":todo["description"],
-        "completed":todo["completed"],
-        "date":todo["date"]
+        "task_name":todo["task_name"],
+        "task_description":todo["task_description"],
     }
 
 
