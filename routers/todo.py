@@ -19,8 +19,8 @@ def get_todo():
         )
 
 @todo.get('/todo/{id}')
-def get_todo(id):
-    '''This function will return the particular data of given id'''
+def get_todo_by_id(id):
+    '''This function will return the particular todo data of given id'''
     todo=todos_serializer(conn.Notes.todo.find({"_id":(ObjectId(id))}))
     if todo:
         return {"status":"ok","data":todo}
@@ -61,7 +61,7 @@ def delete_todo(id):
     '''This api will return the data of given id'''
     deleted=conn.Notes.todo.find_one_and_delete({"_id":(ObjectId(id))})
     if deleted:
-        return ({"status":"Success"})
+        return ({"status":"Success",'data':"Data Deleted Successfully"})
     else:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Data not deleted"
