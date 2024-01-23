@@ -1,5 +1,5 @@
 from bson import ObjectId
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException,status
 from fastapi.templating import Jinja2Templates
 from config.db import conn
 from models.user import User
@@ -29,3 +29,9 @@ async def update_user(id,user:User):
 @user.delete('/user/{id}')
 async def delete_user(id,user:User):
     return userEntity(conn.Notes.user.find_one_and_delete({"_id":(ObjectId(id))}))
+
+@user.get('/user/{id}')
+def get_todo(id):
+    '''This function will return the particular data of given id'''
+    todo=usersEntity(conn.Notes.user.find({"_id":(ObjectId(id))}))
+    return {'status':'success','data':todo}
