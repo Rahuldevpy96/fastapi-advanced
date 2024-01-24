@@ -9,7 +9,7 @@ todo=APIRouter()
 @todo.get('/todo')
 def get_todo():
     '''This Function will get all the todo list
-    If there is no data in  database than it will return a message "Data Not found"'''
+    If there is no data in  database than it will return a message "Data Not found".'''
     todo=todos_serializer(conn.Notes.todo.find())
     if todo:
         return {"status":"ok","data":todo}
@@ -20,7 +20,7 @@ def get_todo():
 
 @todo.get('/todo/{id}')
 def get_todo_by_id(id):
-    '''This function will return the particular todo data of given id'''
+    '''This function will return the particular todo data of given id.'''
     todo=todos_serializer(conn.Notes.todo.find({"_id":(ObjectId(id))}))
     if todo:
         return {"status":"ok","data":todo}
@@ -31,7 +31,7 @@ def get_todo_by_id(id):
 
 @todo.post('/todo')
 def post_todo(todo:Todo):
-    '''From this api we will be able to add new data'''
+    '''From this api we will be able to add new data.'''
     todos=conn.Notes.todo.insert_one(dict(todo))
     todo=todos_serializer(conn.Notes.todo.find({"_id":todos.inserted_id}))
     if todo:
@@ -44,7 +44,7 @@ def post_todo(todo:Todo):
 
 @todo.put('/todo/{id}/')
 def update_todo(id,todo:Todo):
-    '''From this api we can update the data of given id'''
+    '''From this api we can update the data of given id.'''
     updated=conn.Notes.todo.find_one_and_update({"_id":(ObjectId(id))},{
         "$set":dict(todo)
     })
@@ -58,7 +58,7 @@ def update_todo(id,todo:Todo):
 
 @todo.delete('/todo/{id}/')
 def delete_todo(id):
-    '''This api will return the data of given id'''
+    '''This api will return the data of given id.'''
     deleted=conn.Notes.todo.find_one_and_delete({"_id":(ObjectId(id))})
     if deleted:
         return ({"status":"Success",'data':"Data Deleted Successfully"})
