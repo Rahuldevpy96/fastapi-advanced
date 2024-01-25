@@ -1,17 +1,10 @@
-# def userEntity(item)->dict:
-#     return {
-#         "id":str(item["_id"]),
-#         "name":item["name"],
-#         "email":item["email"],
-#         "password":item["password"]
-#     }
 def userEntity(item):
     try:
         user_entity = {
         "id":str(item["_id"]),
-        "name":item["name"],
+        "username":item["username"],
         "email":item["email"],
-        "password":item["password"]            
+        "hashed_password":item["hashed_password"]            
         }
         return user_entity
     except KeyError as e:
