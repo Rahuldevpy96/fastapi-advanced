@@ -20,3 +20,8 @@ Now we are able to add, update, delete and get all users.
 Created apis for managing todo list, it that we can  get all the list for todos and we can add too
 Added update and delete api of todo
 ![Alt text](image-1.png)
+
+
+Added  a api to generate the bearer-token.
+
+
