@@ -22,6 +22,6 @@ Added update and delete api of todo
 ![Alt text](image-1.png)
 
 
-Added  a api to generate the bearer-token.
+Added  a api to generate the bearer-token
 
 
