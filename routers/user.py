@@ -29,6 +29,18 @@ async def find_all_users():
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Data Not found"
         )
+@user.get('/count_users')
+async def count_users():
+    '''This api will show all the users.'''
+    user= usersEntity(conn.Notes.user.find())
+    users=len(user)
+    if users:
+        return {"status":"ok","data":users
+}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Data Not found"
+        )
 
 
 async def create_users(user:User):
