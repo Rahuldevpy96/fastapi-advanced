@@ -31,7 +31,7 @@ async def find_all_users():
         )
 @user.get('/count_users')
 async def count_users():
-    '''This api will show all the users.'''
+    '''This api will count all the users.'''
     user= usersEntity(conn.Notes.user.find())
     users=len(user)
     if users:
@@ -39,7 +39,7 @@ async def count_users():
 }
     else:
         raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail="Data Not found"
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Something went wrong"
         )
 
 

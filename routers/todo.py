@@ -18,6 +18,18 @@ def get_todo():
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Data Not found"
         )
 
+@todo.get('/count_todos')
+async def count_todos():
+    '''This api will count all the todos.'''
+    todo= todos_serializer(conn.Notes.todo.find())
+    todos=len(todo)
+    if todos:
+        return {"status":"ok","data":todos
+}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED, detail="Something went wrong"
+        )
 @todo.get('/todo/{id}')
 def get_todo_by_id(id):
     '''This function will return the particular todo data of given id.'''
