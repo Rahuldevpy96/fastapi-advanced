@@ -81,6 +81,7 @@ async def register(user: User):
 # Endpoint to create a new token
 @user.post("/token")
 async def create_token(username: str, password: str):
+    '''This api will create the token'''
     user = await get_user(username)
     if user and bcrypt.verify(password, user["hashed_password"]):
         # Token expiration time: 30 minutes (adjust as needed)
