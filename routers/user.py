@@ -75,6 +75,7 @@ async def verify_token(token: str = Depends(oauth2_scheme)):
 
 @user.post("/register")
 async def register(user: User):
+    '''From this api we will be able to add new user.'''
     await create_users(user)
     return {"message": "User registered successfully"}
 
