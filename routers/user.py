@@ -9,6 +9,15 @@ from fastapi.templating import Jinja2Templates
 from config.db import conn
 from models.user import User
 from schemas.user import userEntity,usersEntity
+import time
+from starlette.middleware.base import BaseHTTPMiddleware
+from fastapi import  Request,FastAPI
+from fastapi.middleware import *
+
+
+
+
+
 
 user=APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
@@ -142,4 +151,17 @@ def get_user_by_id(id):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Data Not found"
         )
-    
+
+
+class MyMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self,request:Request,call_next):
+        start_time = time.time()
+        response = await call_next(request)
+        process_time = time.time() - start_time
+        response.headers["X-Process-Time"] = str(process_time)
+        return response    
+
+
+@user.get('/middleware')
+async def first_middleware():
+    return {"status":"Successful"}
