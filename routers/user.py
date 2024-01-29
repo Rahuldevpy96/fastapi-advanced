@@ -4,7 +4,7 @@ from jose import JWTError,jwt
 from passlib.hash import bcrypt
 from passlib.handlers.bcrypt import bcrypt
 from bson import ObjectId
-from fastapi import APIRouter, Depends, HTTPException,status
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException,status
 from fastapi.templating import Jinja2Templates
 from config.db import conn
 from models.user import User
@@ -165,3 +165,14 @@ class MyMiddleware(BaseHTTPMiddleware):
 @user.get('/middleware')
 async def first_middleware():
     return {"status":"Successful"}
+
+
+def write_notifucation(email:str,message=""):
+    with open('log.text',mode='w') as email_file:
+        content=f"notification for {email}:{message}"
+        email_file.write(content)
+
+@user.post('/extra_task')
+async def send_notification(email:str,background_task:BackgroundTasks):
+    background_task.add_task(write_notifucation,email,message="Some notification")
+    return {"message":"Notification sent in the background"}
