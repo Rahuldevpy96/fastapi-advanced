@@ -170,9 +170,11 @@ async def first_middleware():
 def write_notifucation(email:str,message=""):
     with open('log.text',mode='w') as email_file:
         content=f"notification for {email}:{message}"
+        time.sleep(5)
         email_file.write(content)
 
 @user.post('/extra_task')
 async def send_notification(email:str,background_task:BackgroundTasks):
+    '''By using this api we will be able to notify the email has some notification'''
     background_task.add_task(write_notifucation,email,message="Some notification")
     return {"message":"Notification sent in the background"}
