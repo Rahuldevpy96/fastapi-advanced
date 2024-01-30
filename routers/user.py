@@ -168,8 +168,8 @@ async def first_middleware():
 
 
 def write_notifucation(email:str,message=str):
-    with open('log.text',mode='w') as email_file:
-        content=f"notification for {email}:{message}"
+    with open('log.text',mode='a') as email_file:
+        content=f"Notification for {email}: {message}\n"
         time.sleep(5)
         email_file.write(content)
 
