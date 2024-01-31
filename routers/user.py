@@ -164,5 +164,6 @@ class MyMiddleware(BaseHTTPMiddleware):
 
 @user.get('/middleware')
 async def first_middleware():
+    '''This api will create a middleware'''
     return {"status":"Successful"}
 
