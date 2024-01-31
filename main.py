@@ -6,7 +6,7 @@ from routers.todo import todo
 from routers.extra import extra
 
 
-app=FastAPI()
+app=FastAPI(title="Neha's POC Project on FastAPI",description="This is a pos project on fastapi")
 app.include_router(note,tags=['Notes'])
 app.include_router(user,tags=['Users'])
 app.include_router(todo,tags=['Todo'])
