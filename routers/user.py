@@ -129,7 +129,7 @@ async def update_user(id,user:User):
 
 
 @user.delete('/user/{id}')
-async def delete_user(id,user:User):
+async def delete_user(id):
     '''This api will delete the user of given id.'''
     user= userEntity(conn.Notes.user.find_one_and_delete({"_id":(ObjectId(id))}))
     if user:
