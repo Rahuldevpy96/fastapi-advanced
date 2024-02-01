@@ -88,7 +88,6 @@ async def register(user: User):
     await create_users(user)
     return {"message": "User registered successfully"}
 
-# Endpoint to create a new token
 @user.post("/token")
 async def create_token(username: str, password: str):
     '''This api will create the token'''
@@ -106,10 +105,10 @@ async def create_token(username: str, password: str):
         headers={"WWW-Authenticate": "Bearer"},
     )
 
-# Protected endpoint that requires a valid token
-@user.get("/protected")
-async def get_protected_data(current_user: str = Depends(verify_token)):
-    return {"message": "This is protected data", "current_user": current_user}
+# # Protected endpoint that requires a valid token
+# @user.get("/protected")
+# async def get_protected_data(current_user: str = Depends(verify_token)):
+#     return {"message": "This is protected data", "current_user": current_user}
 
 
 @user.put('/user/{id}')
