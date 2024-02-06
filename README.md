@@ -1,27 +1,27 @@
-# fastapi-advanced
+http://localhost:8000/users ->This api will show all the users.
 
-Creating an project on fastapi
-Using Mongodb
-Using Static and template files in it 
+http://localhost:8000/count_users ->This api will count all the users.
 
-Till now i have created a navbar in index.html and a form and getting data from database.
+http://localhost:8000/register ->From this api we will be able to add new user. For that we have to enter username, email, hashed_password
 
+http://localhost:8000/user/{id} ->After providing the id we will be able to edit the user details.
 
-Adding data from frontend is not complete yet will complete it soon.
+http://localhost:8000/user/{id} -> This api will delete the user of given id.
 
-Now we are able to insert data from frontend too.
+http://localhost:8000/user/{id} -> This function will return the particular user data of given id.
 
-Today i have created apis for creating new user and get all user
-we are able to add the user but we are not getting response as expected so will work on this.
-
-Now we are able to add, update, delete and get all users.
+http://localhost:8000/user/middleware -> Here i have added a middleware
 
 
-Created apis for managing todo list, it that we can  get all the list for todos and we can add too
-Added update and delete api of todo
 
+http://localhost:8000/todo ->This Function will get all the todo list. If there is no data in  database than it will return a message "Data Not found".
 
-Added  a api to generate the bearer-token
-Added some more apis for like middleware and add extra data in text file
+http://localhost:8000/todo ->From this api we will be able to add new data. For that we need to add task_name and task_description
 
-![Alt text](image-3.png)
+http://localhost:8000/count_todos ->This api will count all the todos.
+
+http://localhost:8000/todo/{id} ->This function will return the particular todo data of given id.
+
+http://localhost:8000/todo/{id} -> From this api we can update the data of given id.
+
+http://localhost:8000/todo/{id} ->This api will return the data of given id.
