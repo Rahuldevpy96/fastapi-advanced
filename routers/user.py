@@ -53,7 +53,7 @@ async def count_users():
 
 
 async def create_users(user:User):
-    '''From this api we will be able to add new user.'''
+    '''From this function we will be able to add new user.'''
     user_data = user.dict()
     print(user_data)
     user_data["hashed_password"] = bcrypt.hash(user_data["hashed_password"])
@@ -61,9 +61,9 @@ async def create_users(user:User):
     return result
 
     
-async def get_user(username: str):
-    user = conn.Notes.user.find_one({"username": username})
-    return user
+# async def get_user(username: str):
+#     user = conn.Notes.user.find_one({"username": username})
+#     return user
 
 async def verify_token(token: str = Depends(oauth2_scheme)):
     credentials_exception = HTTPException(
@@ -84,26 +84,26 @@ async def verify_token(token: str = Depends(oauth2_scheme)):
 
 @user.post("/register")
 async def register(user: User):
-    '''From this api we will be able to add new user.'''
+    '''From this api we will be able to add new user. For that we have to enter username, email, hashed_password'''
     await create_users(user)
     return {"message": "User registered successfully"}
 
-@user.post("/token")
-async def create_token(username: str, password: str):
-    '''This api will create the token'''
-    user = await get_user(username)
-    if user and bcrypt.verify(password, user["hashed_password"]):
-        # Token expiration time: 30 minutes (adjust as needed)
-        expire_time = 30  # minutes
-        token_data = {"sub": username, "exp": expire_time}
-        token = jwt.encode(token_data, SECRET_KEY, algorithm=ALGORITHM)
-        return {"access_token": token, "token_type": "bearer"}
+# @user.post("/token")
+# async def create_token(username: str, password: str):
+#     '''This api will create the token'''
+#     user = await get_user(username)
+#     if user and bcrypt.verify(password, user["hashed_password"]):
+#         # Token expiration time: 30 minutes (adjust as needed)
+#         expire_time = 30  # minutes
+#         token_data = {"sub": username, "exp": expire_time}
+#         token = jwt.encode(token_data, SECRET_KEY, algorithm=ALGORITHM)
+#         return {"access_token": token, "token_type": "bearer"}
 
-    raise HTTPException(
-        status_code=401,
-        detail="Invalid credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+#     raise HTTPException(
+#         status_code=401,
+#         detail="Invalid credentials",
+#         headers={"WWW-Authenticate": "Bearer"},
+#     )
 
 # Protected endpoint that requires a valid token
 # @user.get("/protected")

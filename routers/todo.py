@@ -43,7 +43,7 @@ def get_todo_by_id(id):
 
 @todo.post('/todo')
 def post_todo(todo:Todo):
-    '''From this api we will be able to add new data.'''
+    '''From this api we will be able to add new data. For that we need to add task_name and task_description'''
     todos=conn.Notes.todo.insert_one(dict(todo))
     todo=todos_serializer(conn.Notes.todo.find({"_id":todos.inserted_id}))
     if todo:
@@ -70,7 +70,7 @@ def update_todo(id,todo:Todo):
 
 @todo.delete('/todo/{id}/')
 def delete_todo(id):
-    '''This api will return the data of given id.'''
+    '''This api will delete the data of given id.'''
     deleted=conn.Notes.todo.find_one_and_delete({"_id":(ObjectId(id))})
     if deleted:
         return ({"status":"Success",'data':"Data Deleted Successfully"})
