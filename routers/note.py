@@ -19,7 +19,7 @@ async def read_item(request: Request):
             "title":doc["title"],
             "description":doc["description"]
         })
-    print(newDocs)
+    # print(newDocs)
     return templates.TemplateResponse("index.html", {"request":request,"newDocs":newDocs} )
 
 
