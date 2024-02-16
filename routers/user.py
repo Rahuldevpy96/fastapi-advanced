@@ -75,7 +75,7 @@ async def verify_token(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
-        if username is None:
+        if username :
             raise credentials_exception
     except JWTError:
         raise credentials_exception
@@ -106,9 +106,9 @@ async def create_token(username: str, password: str):
     )
 
 # Protected endpoint that requires a valid token
-@user.get("/protected")
-async def get_protected_data(current_user: str = Depends(verify_token)):
-    return {"message": "This is protected data", "current_user": current_user}
+# @user.get("/protected")
+# async def get_protected_data(current_user: str = Depends(verify_token)):
+#     return {"message": "This is protected data", "current_user": current_user}
 
 
 @user.put('/user/{id}')
